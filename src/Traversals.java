@@ -117,9 +117,23 @@ public class Traversals {
     if (node == null) {
       return 0;
     }
+    Set<Integer> something = new HashSet<>();
+    Queue<TreeNode<Integer>> queue = new LinkedList();
+    queue.add(node);
+
+    while (!queue.isEmpty()) {
+      TreeNode<Integer> current = queue.remove();
+      something.add(current.value);
+
+      if (current.left != null) {
+        queue.add(current.left);
+      }
+      if (current.right !=null) {
+        queue.add(current.right);
+      }
+    }
     
-    
-    return 0;
+    return something.size();
   }
 
   /**
@@ -134,8 +148,21 @@ public class Traversals {
     if (node == null) {
       return false;
     }
+    if (node.left == null && node.right == null) {
+      return true;
+    }
+
+    boolean leftValid = false;
+    if (node.left != null && node.left.value > node.value) {
+      leftValid = hasStrictlyIncreasingPath(node.left);
+    }
+
+    boolean rightValid = false;
+    if (node.right != null && node.right.value > node.value) {
+      rightValid = hasStrictlyIncreasingPath(node.right);
+    }
     
-    return false;
+    return leftValid || rightValid; 
   }
 
   // OPTIONAL CHALLENGE
