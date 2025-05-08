@@ -75,7 +75,7 @@ public class Traversals {
    */
   public static <T> List<T> collectLevelOrderValues(TreeNode<T> node) {
     if (node == null) {
-      return null;
+      return new ArrayList<>();
     }
     /*
      * 1. Create a queue
